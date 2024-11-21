@@ -1,0 +1,13 @@
+[Unit]
+Description=Disable USB controllers on suspend/hibernate and rescan on resume
+Before=sleep.target
+After=suspend.target hibernate.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/disable_usb_controllers.sh hibernate
+ExecStop=/usr/local/bin/disable_usb_controllers.sh resume
+RemainAfterExit=true
+
+[Install]
+WantedBy=sleep.target
